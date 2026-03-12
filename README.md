@@ -90,6 +90,24 @@ English, Arabic, Bengali (Banglish), Bulgarian, Catalan, Chinese (Simplified), C
 | Rotate item (placement) | R or right-click |
 | Delete item (placement) | Delete or right-click |
 
+## Bundled Mods
+
+The following community mods are included out of the box and can be enabled from the **Mods** menu in-game:
+
+| Mod | Author | What it does |
+|-----|--------|--------------|
+| **More Tech Stuff** | bartusek27 | Adds more technologies to research |
+| **No Call in Sick** | Sevenrou | Employees will never call in sick |
+| **Virtual Servers Pack 2020** | Mario | Adds 10 new virtual servers |
+| **Benefits Pack** | Mario | Adds 5 new employee benefits |
+| **Additional Products** | Professor | Adds extra website product types and 56 new competitors |
+| **Upgrade Employees** | Dilandau | Upgrade all employees at once in bulk |
+| **Real Companies** | WorldEarl | Replaces fictional competitor names/logos with real-world companies (e.g. Friendbook becomes Facebook) |
+| **Cuteframework 5.0** | gavinx2031 | Adds a new framework to research and use |
+| **Nightly Profit Mod** | CDGameDev | Adds a dedicated profit tracking page with graphs showing nightly income, server costs, wages, and benefits over time |
+
+> Mods can be toggled on/off individually. A game restart is required after changing mod state.
+
 ## Project Structure
 
 ```
