@@ -1,0 +1,12 @@
+{
+  "benefit_houserent": "Alquiler de casa gratis",
+  "benefit_houserent_description": "Aumenta la satisfacción de los empleados pagando los alquileres de casa. (Aumenta la satisfacción en un 100%)",
+  "benefit_freebills": "Facturas Gratis",
+  "benefit_freebills_description": "Aumenta la satisfacción de los empleados mediante el pago de sus facturas. (Aumenta la satisfacción en un 60%)",
+  "benefit_freecomputers": "Computadoras gratis",
+  "benefit_freecomputers_description": "Ofrece computadoras gratis a sus empleados para que puedan comunicarse con otros empleados en el hogar. (Aumenta la satisfacción en un 50%)",
+  "benefit_freerepair": "Servicio gratuito de reparación de computadoras",
+  "benefit_freerepair_description": "Las computadoras a veces se rompen. Se paga el servicio de reparación para arreglar los ordenadores de sus empleados de forma gratuita. (Aumenta la satisfacción en un 30%)",
+  "benefit_theatertickets": "Entradas de teatro gratis",
+  "benefit_theatertickets_description": "Aumenta la satisfacción de los empleados dándoles entradas de teatro gratis. (Aumenta la satisfacción en un 50%)"
+}

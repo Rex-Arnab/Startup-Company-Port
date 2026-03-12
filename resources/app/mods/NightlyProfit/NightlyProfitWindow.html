@@ -1,0 +1,206 @@
+<!-- Style information -->
+<head>
+    <style>
+        .scrollable {
+            width: 854px;
+            overflow-x: scroll;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            display:none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        /* Style the tab */
+        .tab {
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: rgb(221, 221, 221);
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: rgb(221, 221, 221);
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: rgb(221, 221, 221);
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+</head>
+
+<!-- Window header -->
+<h1>
+    <i class="fa fa-dollar"></i>
+    Nightly Profit
+    <i class="fa fa-times pull-right close-button" close-all-ui></i>
+</h1>
+
+<div class="tab">
+    <button class="tablinks" onclick="ChangeTab(event, 'Graph')">Graph</button>
+    <button class="tablinks" onclick="ChangeTab(event, 'Settings')">Settings</button>
+</div>
+
+<script>
+function ChangeTab(Event, TabName) {
+    var i, TabContent, TabLinks;
+    TabContent = document.getElementsByClassName("TabContent");
+    for (i = 0; i < TabContent.length; i++) {
+        TabContent[i].style.display = "none";
+    }
+    TabLinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < TabLinks.length; i++) {
+        TabLinks[i].className = TabLinks[i].className.replace(" active", "");
+    }
+    document.getElementById(TabName).style.display = "initial";
+    Event.currentTarget.className += " active";
+}
+</script>
+
+<div id="Graph" class="TabContent active" style="display: initial;">
+    <!-- Top div -->
+    <div class="padding" align="center">
+        <table>
+            <td>
+                <h4 align="center">Data Display:</h4>
+                <!-- Select1 - Display of Graph (Line/Bar) -->
+                <select id="dataDisplay" ng-model="nightlyprofitmodCtrl.selectedChartType" ng-change="nightlyprofitmodCtrl.ChangeDataShowcase()">
+                    <option value="bar">Bar Chart</option>
+                    <option value="line">Line Graph</option>
+                </select>
+            </td>
+            <td>
+                <h4 align="center">Time Frame:</h4>
+                <!-- Select2 - Timeframe of Graph (3 Days - 1 Year) -->
+                <select id="timeFrameSelect" ng-model="nightlyprofitmodCtrl.timeFrame" ng-change="nightlyprofitmodCtrl.ChangeTimeFrame()">
+                    <option value=3>3 Days</option>
+                    <option value=5>5 Days</option>
+                    <option value=7>1 Week</option>
+                    <option value=14>2 Weeks</option>
+                    <option value=30>1 Month</option>
+                    <option value=60>2 Months</option>
+                    <option value=365>1 Year</option>
+                </select>
+            </td>
+        </table>
+    </div>
+
+    <!-- Bar Chart -->
+    <canvas id="npmBarChart" width="300" height="100" align="center"></canvas>
+
+    <!-- Line Graph -->
+    <canvas id="npmLineChart" width="300" height="100" align="center"></canvas>
+
+    <!-- Bottom Part -->
+    <div class="padding" align="center">
+        <table border="1" style="width:100%">
+            <tr>
+                <td align="center"><h4 id="LastNightProfit">Last Night's Profit:</h4></td>
+                <td align="center"><h4 id="LastNightProfitAmount"></h4></td>
+                <td align="center"><h4 id="SmallestProfitString"></h4></td>
+                <td align="center"><h4 id="SmallestProfitAmount"></h4></td>
+            </tr>
+            <tr>
+                <td align="center"><h4 id="totalProfit"></h4></td>
+                <td align="center"><h4 id="TotalProfitAmount"></h4></td>
+                <td align="center"><h4 id="LargestProfitString"></h4></td>
+                <td align="center"><h4 id="LargestProfitAmount"></h4></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="Settings" class="TabContent" style="display: none;">
+    <div class="padding" align="center">
+      <h4>Enable Notifications?</h4>
+      <label class="switch">
+        <input type="checkbox" id="EnableNotifications" ng-class="{ active: info.instance.activated }" ng-click="nightlyprofitmodCtrl.UpdateSettings()" checked:"{{nightlyprofitmodCtrl.enableNotifications}}">
+        <div class="slider round"></div>
+      </label>
+    </div>
+
+    <div class="padding" align="center">
+      <h4>Enable Badges?</h4>
+      <label class="switch">
+        <input type="checkbox" id="EnableBadges" ng-class="{ active: info.instance.activated }" ng-click="nightlyprofitmodCtrl.UpdateSettings()" checked:"{{nightlyprofitmodCtrl.enableBadges}}">
+        <div class="slider round"></div>
+      </label>
+    </div>
+
+    <div class="padding" align="center">
+      <h4>Start Graphs at 0?</h4>
+      <label class="switch">
+        <input type="checkbox" id="ZeroGraphs" ng-class="{ active: info.instance.activated }" ng-click="nightlyprofitmodCtrl.UpdateSettings()" checked:"{{nightlyprofitmodCtrl.zeroGraphs}}">
+        <div class="slider round"></div>
+      </label>
+    </div>
+</div>

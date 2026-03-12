@@ -1,0 +1,18 @@
+{
+   "pack_1" : "Benefits Pack #3 - By Mario",
+   "benefit_houserent" : "Free House Rent",
+   "benefit_houserent_description" : "Increase employees satisfaction by paying their house rents. (Increases satisfaction by 100%)",
+   "benefit_freebills" : "Free Bills",
+   "benefit_freebills_description" : "Increase employees satisfaction by paying their bills. (Increases satisfaction by 60%)",
+   "benefit_freecomputers" : "Free Computers",
+   "benefit_freecomputers_description" : "Give free computers to your employees so that they can communicate with other employees at home. (Increases satisfaction by 50%)",
+   "benefit_freerepair" : "Free Computer Repair Service",
+   "benefit_freerepair_description" : "Computers sometimes break. Pay the Repair Service to fix the computers of your employees for free. (Increases satisfaction by 30%)",
+   "benefit_theatertickets" : "Free Theater Tickets",
+   "benefit_theatertickets_description" : "Increase employees satisfaction by giving them free theater tickets. (Increases satisfaction by 50%)",
+   "benefit_pizzadelivery" : "Pizza Delivery At Office",
+   "benefit_pizzadelivery_description" : "Increase employees satisfaction by giving them free pizzas!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (Increases satisfaction by 20%)",
+   "settings": "Language Settings",
+   "newbenefits_stringsnotavailable": "If you select a language, and you still see English strings, this means that the string is not translated.",
+   "tutorial_settings": "Once you select the language from the dropdown, every string should be translated. If you still see English but you are 100% sure that the strings are translated, select English and then the language you selected before. This should fix the issue."
+}
