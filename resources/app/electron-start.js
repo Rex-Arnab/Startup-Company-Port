@@ -78,15 +78,34 @@ const setupElectron = () => {
         mainWindow.setMenu(null);
         mainWindow.loadURL(indexUrl);
 
+        // A relaunched game (e.g. after a language change) is detached from the terminal and
+        // can open behind other windows, so always bring it to the front once loaded.
+        mainWindow.webContents.once('did-finish-load', bringToFront);
+
         mainWindow.on('closed', function () {
             mainWindow = null;
         });
+    }
+
+    function bringToFront() {
+        if (mainWindow == null) {
+            return;
+        }
+        if (mainWindow.isMinimized()) {
+            mainWindow.restore();
+        }
+        mainWindow.show();
+        mainWindow.focus();
+        app.focus({steal: true});
     }
 
     const gotTheLock = app.requestSingleInstanceLock();
     if(!gotTheLock) {
         app.quit();
     }
+
+    // Starting the game again while it already runs shows the running window instead of nothing.
+    app.on('second-instance', bringToFront);
 
     app.on('ready', createWindow);
     app.on('window-all-closed', function () {
