@@ -24,8 +24,8 @@ Third-party authors (see `mod.json` `author`). Credit is listed in the root `REA
 
 ## Verification
 
-- `for f in resources/app/mods/*/start.js; do node --check "$f" || echo "FAIL $f"; done` (run from repo root).
-- `for f in resources/app/mods/*/mod.json; do node -e 'JSON.parse(require("fs").readFileSync(process.argv[1]))' "$f" || echo "FAIL $f"; done`.
+- `for f in game/resources/app/mods/*/start.js; do node --check "$f" || echo "FAIL $f"; done` (run from repo root).
+- `for f in game/resources/app/mods/*/mod.json; do node -e 'JSON.parse(require("fs").readFileSync(process.argv[1]))' "$f" || echo "FAIL $f"; done`.
 - Enable the mod in-game, restart, and confirm its effect.
 
 ## Child DOX Index

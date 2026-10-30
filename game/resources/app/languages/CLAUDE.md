@@ -33,7 +33,7 @@ chat-style text, not native script.
 ## Verification
 
 ```bash
-cd resources/app && node -e 'const fs=require("fs");const e=Object.keys(JSON.parse(fs.readFileSync("languages/English.json")));for(const f of fs.readdirSync("languages").filter(f=>f.endsWith(".json"))){const k=new Set(Object.keys(JSON.parse(fs.readFileSync("languages/"+f))));const es=new Set(e),extra=[...k].filter(x=>!es.has(x)),miss=e.filter(x=>!k.has(x));if(extra.length||(["en.json","English.json","Hindi.json","Bengali.json"].includes(f)&&miss.length))console.log(f,"extra",extra.length,"missing",miss.length)}'
+cd game/resources/app && node -e 'const fs=require("fs");const e=Object.keys(JSON.parse(fs.readFileSync("languages/English.json")));for(const f of fs.readdirSync("languages").filter(f=>f.endsWith(".json"))){const k=new Set(Object.keys(JSON.parse(fs.readFileSync("languages/"+f))));const es=new Set(e),extra=[...k].filter(x=>!es.has(x)),miss=e.filter(x=>!k.has(x));if(extra.length||(["en.json","English.json","Hindi.json","Bengali.json"].includes(f)&&miss.length))console.log(f,"extra",extra.length,"missing",miss.length)}'
 ```
 
 No output = pass. Then pick the language in-game and check the changed screen.

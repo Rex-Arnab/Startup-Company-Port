@@ -1,4 +1,4 @@
-# resources/app — Electron app
+# game/resources/app — Electron app
 
 ## Purpose
 
@@ -41,7 +41,7 @@ game from `dest/`.
 ## Verification
 
 - `node --check electron-start.js` after edits.
-- `./start.sh` from repo root; reach the main menu and the screen you changed.
+- `open "Start Mac.command"` from repo root; reach the main menu and the screen you changed.
 - Scripted check: `node_modules/.bin/electron . --remote-debugging-port=<free port>` (9333 is often
   taken by Chrome), then drive via CDP. The game auto-loads the last save and is single-instance;
   it ignores SIGTERM, so stop it with `kill -9 <main pid>`. Back up

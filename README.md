@@ -1,13 +1,13 @@
 <div align="center">
 
-<img src="resources/app/images/logo.png" alt="Startup Company" width="320">
+<img src="game/resources/app/images/logo.png" alt="Startup Company" width="320">
 
-# Startup Company — macOS & Linux Port
+# Startup Company — macOS, Linux & Windows
 
 **Build a tech startup from a tiny desk to a billion-dollar empire.**<br>
 Hire a team, ship websites, run your own servers, fight the competition, and retire rich.
 
-![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)
+![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey)
 ![Electron](https://img.shields.io/badge/Electron-11.5.0-47848F?logo=electron&logoColor=white)
 ![Languages](https://img.shields.io/badge/languages-18-blue)
 ![Mods](https://img.shields.io/badge/bundled%20mods-9-orange)
@@ -69,24 +69,29 @@ The game runs in real time with a day/night cycle. Each day your team works, ser
 
 ## Quick start
 
-> **Needs:** macOS or Linux, [Node.js](https://nodejs.org) with npm, and internet on the first run (to download Electron).
+> **Needs:** [Node.js](https://nodejs.org) with npm, and internet on the first run (to download Electron).
 
-```bash
-chmod +x start.sh   # once
-./start.sh          # every time you want to play
-```
+Pick the launcher for your computer:
 
-`start.sh` does three things:
+| Computer       | Launcher            | How to start                          |
+| -------------- | ------------------- | ------------------------------------- |
+| 🍎 **macOS**   | `Start Mac.command` | Double-click it in Finder.            |
+| 🐧 **Linux**   | `start-linux.sh`    | Run `./start-linux.sh` in a terminal. |
+| 🪟 **Windows** | `Start Windows.bat` | Double-click it in File Explorer.     |
 
-1. Checks for Node.js and npm (installs Node via Homebrew or nvm if it is missing).
-2. Installs Electron into `resources/app/node_modules` if it is not there yet.
+Every launcher does the same three things:
+
+1. Checks for Node.js and npm (the Mac launcher installs Node via Homebrew if it is missing; the Linux launcher uses nvm).
+2. Installs Electron into `game/resources/app/node_modules` the first time.
 3. Starts the game.
 
+> Tested on macOS. The Linux and Windows launchers are new — please open an issue if one does not work for you.
+
 <details>
-<summary><b>Run it without the launcher</b></summary>
+<summary><b>Run it without a launcher</b></summary>
 
 ```bash
-cd resources/app
+cd game/resources/app
 npm install --force --ignore-scripts
 node node_modules/electron/install.js
 npm start
@@ -141,10 +146,10 @@ All mods ship with the game. Turn them on or off in the **Mods** menu, then rest
 ## Troubleshooting
 
 <details>
-<summary><b>The game does not open after <code>./start.sh</code></b></summary>
+<summary><b>The game does not open</b></summary>
 
 - Check Node.js: `node --version`.
-- Install Electron by hand: `cd resources/app && npm install --force --ignore-scripts && node node_modules/electron/install.js`.
+- Install Electron by hand: `cd game/resources/app && npm install --force --ignore-scripts && node node_modules/electron/install.js`.
 - Only one copy of the game can run. If a copy is already open, starting it again brings that window to the front.
 
 </details>
@@ -157,16 +162,16 @@ That is a harmless Electron warning. It shows on every start, also when everythi
 </details>
 
 <details>
-<summary><b><code>permission denied: ./start.sh</code></b></summary>
+<summary><b><code>permission denied</code> when starting the Mac or Linux launcher</b></summary>
 
-Run `chmod +x start.sh` once.
+Run `chmod +x "Start Mac.command" start-linux.sh` once.
 
 </details>
 
 <details>
 <summary><b>npm install fails with native module errors</b></summary>
 
-Expected on macOS. Some dependencies are Windows-only, so the launcher installs with `--ignore-scripts` and downloads Electron separately.
+Some dependencies are Windows-only, so the launchers install with `--ignore-scripts` and download Electron separately.
 
 </details>
 
@@ -174,21 +179,26 @@ Expected on macOS. Some dependencies are Windows-only, so the launcher installs 
 
 ```text
 .
-├── start.sh                    # Launcher
-├── docs/screenshots/           # Images used in this README
-└── resources/app/
-    ├── electron-start.js       # Electron entry point
-    ├── package.json
-    ├── dest/                   # Compiled game code (minified)
-    ├── languages/              # Translation files (one JSON per language)
-    ├── mods/                   # Bundled mods
-    ├── templates/              # UI templates
-    ├── images/ · assets/       # Artwork
-    └── sounds/ · fonts/        # Audio and fonts
+├── Start Mac.command               # macOS launcher (double-click)
+├── start-linux.sh                  # Linux launcher
+├── Start Windows.bat               # Windows launcher (double-click)
+├── README.md · LICENSE
+├── docs/screenshots/               # Images used in this README
+└── game/                           # Everything the game needs
+    ├── LICENSES.chromium.html · steam_appid.txt · version
+    └── resources/app/
+        ├── electron-start.js       # Electron entry point
+        ├── package.json
+        ├── dest/                   # Compiled game code (minified)
+        ├── languages/              # Translation files (one JSON per language)
+        ├── mods/                   # Bundled mods
+        ├── templates/              # UI templates
+        ├── images/ · assets/       # Artwork
+        └── sounds/ · fonts/        # Audio and fonts
 ```
 
 Working on the port? Read the `CLAUDE.md` / `AGENTS.md` file in each folder first. Each one lists that folder's rules and checks.
 
 ## License
 
-See [`LICENSE`](LICENSE) and [`LICENSES.chromium.html`](LICENSES.chromium.html). _Startup Company_ is made by Devhives. This repository only packages it for macOS and Linux.
+See [`LICENSE`](LICENSE) and [`LICENSES.chromium.html`](game/LICENSES.chromium.html). _Startup Company_ is made by Devhives. This repository only packages it to run on macOS, Linux and Windows.
