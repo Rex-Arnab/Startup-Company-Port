@@ -1,52 +1,89 @@
-# Startup Company
+<div align="center">
 
-A business simulation game where you build and grow your own tech startup from the ground up. Hire employees, develop websites, manage servers, negotiate contracts, and compete to become the number one company in the world.
+<img src="resources/app/images/logo.png" alt="Startup Company" width="320">
 
-## About the Game
+# Startup Company — macOS & Linux Port
 
-You start with a small office and a modest budget. Your goal is to:
+**Build a tech startup from a tiny desk to a billion-dollar empire.**<br>
+Hire a team, ship websites, run your own servers, fight the competition, and retire rich.
 
-- Build and launch websites (social media, video sharing, e-commerce, etc.)
-- Hire developers, designers, managers, SysAdmins, and more
-- Research new features and frameworks to grow your products
-- Manage hosting infrastructure — racks, servers, cooling
-- Negotiate ad contracts and venture capital deals
-- Compete against rival companies for market share
-- Retire with the largest possible retirement fund
+![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)
+![Electron](https://img.shields.io/badge/Electron-11.5.0-47848F?logo=electron&logoColor=white)
+![Languages](https://img.shields.io/badge/languages-18-blue)
+![Mods](https://img.shields.io/badge/bundled%20mods-9-orange)
 
-The game runs in real-time with a day/night cycle. Each in-game day your employees work, servers run, contracts tick down, and your bank balance changes. Speed can be set to 1x, 2x, or 3x.
+<img src="docs/screenshots/office.webp" alt="A busy office late in the game" width="100%">
 
-## Requirements
+</div>
 
-- macOS or Linux
-- Node.js — if not installed, the launcher will attempt to install it via Homebrew (macOS) or nvm
-- npm — bundled with Node.js
-- An internet connection on first run (to download Electron)
+---
 
-## How to Play
+## Contents
 
-### 1. Make the launcher executable
+- [About the game](#about-the-game)
+- [Screenshots](#screenshots)
+- [Quick start](#quick-start)
+- [Game modes](#game-modes)
+- [Controls](#controls)
+- [Languages](#languages)
+- [Bundled mods](#bundled-mods)
+- [Troubleshooting](#troubleshooting)
+- [Project structure](#project-structure)
+- [License](#license)
 
-Open a terminal in the game's root folder and run:
+## About the game
+
+You start with one desk and $15,000. Your goal is to retire with the biggest possible fund.
+
+|                        |                                                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------------- |
+| 🏢 **Grow the office** | Rent bigger buildings, buy desks and furniture, keep your team happy.                         |
+| 👩‍💻 **Hire a team**     | Developers, designers, lead developers, marketers, SysAdmins, managers, researchers and more. |
+| 🌐 **Ship websites**   | Social media, video sharing, e-commerce and more — add features and frameworks as you grow.   |
+| 🖥️ **Run the hosting** | Build server racks, manage cooling and power, survive DDoS attacks.                           |
+| 🤝 **Make deals**      | Negotiate ad contracts, take investor money, or buy out your investors.                       |
+| 📈 **Beat the rivals** | Compete for users and climb to #1.                                                            |
+
+The game runs in real time with a day/night cycle. Each day your team works, servers run, contracts tick down and your bank balance moves. Play at 1×, 2× or 3× speed.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/main-menu.webp" alt="Main menu"><br><sub><b>Main menu</b></sub></td>
+    <td width="50%"><img src="docs/screenshots/city-map.webp" alt="City map on day one"><br><sub><b>City map</b> — pick your first office</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/employees.webp" alt="Employees list"><br><sub><b>Employees</b> — speed, mood, salary and status</sub></td>
+    <td><img src="docs/screenshots/research.webp" alt="Research tree"><br><sub><b>Research</b> — unlock roles, features and frameworks</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/finance.webp" alt="Finance overview"><br><sub><b>Finance</b> — costs and income for the next 30 days</sub></td>
+    <td><img src="docs/screenshots/company.webp" alt="Company overview and benefits"><br><sub><b>Company</b> — team makeup and employee benefits</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/hinglish.webp" alt="Game in Hinglish"><br><sub><b>Hinglish</b> — casual Hindi in Roman letters</sub></td>
+    <td><img src="docs/screenshots/language-picker.webp" alt="Language picker with Hindi and Bengali"><br><sub><b>Options</b> — Hindi (Hinglish) and Bengali (Banglish)</sub></td>
+  </tr>
+</table>
+
+## Quick start
+
+> **Needs:** macOS or Linux, [Node.js](https://nodejs.org) with npm, and internet on the first run (to download Electron).
 
 ```bash
-chmod +x start.sh
+chmod +x start.sh   # once
+./start.sh          # every time you want to play
 ```
 
-This only needs to be done once.
+`start.sh` does three things:
 
-### 2. Launch the game
+1. Checks for Node.js and npm (installs Node via Homebrew or nvm if it is missing).
+2. Installs Electron into `resources/app/node_modules` if it is not there yet.
+3. Starts the game.
 
-```bash
-./start.sh
-```
-
-The launcher will:
-1. Check for Node.js and npm
-2. Install npm dependencies if missing (including Electron)
-3. Launch the game window
-
-**Alternatively**, if you prefer to run it directly without the launcher:
+<details>
+<summary><b>Run it without the launcher</b></summary>
 
 ```bash
 cd resources/app
@@ -55,87 +92,103 @@ node node_modules/electron/install.js
 npm start
 ```
 
-### 3. First time setup
+</details>
 
-On first launch you will be asked to:
-- Choose a language
-- Accept the EULA
-- Enter your company name and CEO name
-- Select a game mode (Career or Custom)
+On the first start you pick a language, accept the EULA, name your company and CEO, and choose a game mode.
 
-### Game Modes
+## Game modes
 
-**Career Mode** — Recommended for new players. Follows a structured story with advisor messages and guided milestones.
-
-**Custom Mode** — Set your own starting conditions: money, aging, investor on/off, days per year, and more.
-
-## Languages
-
-The game supports 37 languages including:
-
-English, Arabic, Bengali (Banglish), Bulgarian, Catalan, Chinese (Simplified), Chinese (Traditional), Croatian, Czech, Danish, Dutch, Finnish, French, Georgian, German, Greek, Hebrew, Hindi (Hinglish), Hungarian, Indonesian, Italian, Japanese, Korean, Lithuanian, Norwegian, Polish, Portuguese (BR), Romanian, Russian, Serbian, Spanish (Spain), Swedish, Tagalog, Thai, Turkish, Ukrainian
-
-> **Hinglish** and **Banglish** use romanized Hindi/Bengali written in English letters — the way people naturally type in chat (e.g. "kese ho", "kemon acho").
+| Mode       | Best for            | What you get                                                        |
+| ---------- | ------------------- | ------------------------------------------------------------------- |
+| **Career** | New players         | A guided story with an advisor and milestones that pay out.         |
+| **Custom** | Experienced players | Set starting money, aging, investor on/off, days per year and more. |
 
 ## Controls
 
-| Action | Input |
-|--------|-------|
-| Pan camera | WASD or middle mouse drag |
-| Zoom | Scroll wheel |
-| Pause / Resume | Space |
-| 1x speed | 1 |
-| 2x speed | 2 |
-| 3x speed | 3 |
-| Rotate item (placement) | R or right-click |
-| Delete item (placement) | Delete or right-click |
+| Action                      | Input                                                                    |
+| --------------------------- | ------------------------------------------------------------------------ |
+| Pan camera                  | <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or middle-mouse drag |
+| Zoom                        | Scroll wheel                                                             |
+| Pause / resume              | <kbd>Space</kbd>                                                         |
+| Game speed 1× / 2× / 3×     | <kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd>                               |
+| Rotate item (while placing) | <kbd>R</kbd> or right-click                                              |
+| Delete item (while placing) | <kbd>Delete</kbd> or right-click                                         |
 
-## Bundled Mods
+## Languages
 
-The following community mods are included out of the box and can be enabled from the **Mods** menu in-game:
+Change the language in **Options → Language**, then click **Restart**.
 
-| Mod | Author | What it does |
-|-----|--------|--------------|
-| **More Tech Stuff** | bartusek27 | Adds more technologies to research |
-| **No Call in Sick** | Sevenrou | Employees will never call in sick |
-| **Virtual Servers Pack 2020** | Mario | Adds 10 new virtual servers |
-| **Benefits Pack** | Mario | Adds 5 new employee benefits |
-| **Additional Products** | Professor | Adds extra website product types and 56 new competitors |
-| **Upgrade Employees** | Dilandau | Upgrade all employees at once in bulk |
-| **Real Companies** | WorldEarl | Replaces fictional competitor names/logos with real-world companies (e.g. Friendbook becomes Facebook) |
-| **Cuteframework 5.0** | gavinx2031 | Adds a new framework to research and use |
-| **Nightly Profit Mod** | CDGameDev | Adds a dedicated profit tracking page with graphs showing nightly income, server costs, wages, and benefits over time |
+English · French · German · Chinese (Simplified) · Korean · Russian · Turkish · Portuguese (Brazilian) · Spanish · Italian · Japanese · Dutch · Hungarian · Czech · Polish · Indonesian · **Hindi (Hinglish)** · **Bengali (Banglish)**
 
-> Mods can be toggled on/off individually. A game restart is required after changing mod state.
+> **Hinglish** and **Banglish** are new in this port. They read the way people really type in chat — Roman letters, with everyday English words like _rent_, _building_ and _salary_ kept in English (e.g. _"Ek office building rent karo"_, _"Tumi ki sure?"_).
 
-## Project Structure
+## Bundled mods
 
-```
-.
-+-- start.sh              # Launcher script
-+-- resources/
-    +-- app/
-        +-- electron-start.js   # Electron entry point
-        +-- package.json
-        +-- languages/          # 37 language JSON files
-        +-- dest/               # Compiled game assets
-        +-- templates/          # HTML templates
-        +-- images/             # Game artwork
-        +-- mods/               # Bundled mods
-```
+All mods ship with the game. Turn them on or off in the **Mods** menu, then restart the game.
+
+| Mod                           | Author     | What it does                                                                   |
+| ----------------------------- | ---------- | ------------------------------------------------------------------------------ |
+| **Additional Products**       | Professor  | Extra website product types and 56 new competitors.                            |
+| **Benefits Pack**             | Mario      | 5 new employee benefits.                                                       |
+| **Cuteframework 5.0**         | gavinx2031 | A new framework to research and use.                                           |
+| **More Tech Stuff**           | bartusek27 | More technologies to research.                                                 |
+| **Nightly Profit Mod**        | CDGameDev  | A profit page with graphs of nightly income, server costs, wages and benefits. |
+| **No Call in Sick**           | Sevenrou   | Employees never call in sick.                                                  |
+| **Real Companies**            | WorldEarl  | Swaps fictional competitor names and logos for real-world companies.           |
+| **Upgrade Employees**         | Dilandau   | Upgrade all employees at once.                                                 |
+| **Virtual Servers Pack 2020** | Mario      | 10 new virtual servers.                                                        |
 
 ## Troubleshooting
 
-**Game does not open after `./start.sh`**
-- Make sure Node.js is installed: `node --version`
-- Try running manually: `cd resources/app && npm install --force --ignore-scripts && node node_modules/electron/install.js`
+<details>
+<summary><b>The game does not open after <code>./start.sh</code></b></summary>
 
-**`permission denied: ./start.sh`**
-- Run `chmod +x start.sh` first
+- Check Node.js: `node --version`.
+- Install Electron by hand: `cd resources/app && npm install --force --ignore-scripts && node node_modules/electron/install.js`.
+- Only one copy of the game can run. If a copy is already open, starting it again brings that window to the front.
 
-**npm install fails with native module errors**
-- This is expected on macOS — the launcher uses `--ignore-scripts` to skip Windows-only native modules and installs Electron separately
+</details>
+
+<details>
+<summary><b>I see a <code>contextIsolation</code> warning in the terminal</b></summary>
+
+That is a harmless Electron warning. It shows on every start, also when everything works.
+
+</details>
+
+<details>
+<summary><b><code>permission denied: ./start.sh</code></b></summary>
+
+Run `chmod +x start.sh` once.
+
+</details>
+
+<details>
+<summary><b>npm install fails with native module errors</b></summary>
+
+Expected on macOS. Some dependencies are Windows-only, so the launcher installs with `--ignore-scripts` and downloads Electron separately.
+
+</details>
+
+## Project structure
+
+```text
+.
+├── start.sh                    # Launcher
+├── docs/screenshots/           # Images used in this README
+└── resources/app/
+    ├── electron-start.js       # Electron entry point
+    ├── package.json
+    ├── dest/                   # Compiled game code (minified)
+    ├── languages/              # Translation files (one JSON per language)
+    ├── mods/                   # Bundled mods
+    ├── templates/              # UI templates
+    ├── images/ · assets/       # Artwork
+    └── sounds/ · fonts/        # Audio and fonts
+```
+
+Working on the port? Read the `CLAUDE.md` / `AGENTS.md` file in each folder first. Each one lists that folder's rules and checks.
 
 ## License
 
-See `LICENSE` and `LICENSES.chromium.html` for details.
+See [`LICENSE`](LICENSE) and [`LICENSES.chromium.html`](LICENSES.chromium.html). _Startup Company_ is made by Devhives. This repository only packages it for macOS and Linux.

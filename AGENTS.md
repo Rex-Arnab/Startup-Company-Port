@@ -28,6 +28,9 @@ No test suite. Before claiming done:
   `--ignore-scripts`. Do not remove that flag.
 - Steam: `greenworks/` + `steam_appid.txt` are the Steam SDK bridge; leave as shipped.
 - `firebase-debug.log` is tracked but also gitignored — do not add more logs.
+- README images live in `docs/screenshots/*.webp` (1440×872, English UI). When retaking: back up
+  SaveData first, and hide the Real Companies mod's adult-site competitor and the owner's name in
+  the employee list before capturing.
 
 ## Child DOX Index
 
