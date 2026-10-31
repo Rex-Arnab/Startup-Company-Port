@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Startup Company launcher for macOS (the app you double-click in Finder).
+# Finds Node.js, installs Electron on the first run, then starts the game.
+set -u
+
+ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+APP_DIR="$ROOT/game/resources/app"
+ELECTRON_BIN="$APP_DIR/node_modules/.bin/electron"
+LOG="$HOME/Library/Logs/StartupCompanyLauncher.log"
+
+alert() {
+    osascript -e "display alert \"Startup Company\" message \"$1\" as critical buttons {\"OK\"} default button \"OK\"" >/dev/null 2>&1
+}
+
+notify() {
+    osascript -e "display notification \"$1\" with title \"Startup Company\"" >/dev/null 2>&1
+}
+
+# Finder starts apps without your shell profile, so add the usual Node locations.
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+if ! command -v node >/dev/null 2>&1 && [ -s "$HOME/.nvm/nvm.sh" ]; then
+    source "$HOME/.nvm/nvm.sh"
+fi
+
+if [ ! -d "$APP_DIR" ]; then
+    alert "The game folder is missing. Keep this app next to the 'game' folder."
+    exit 1
+fi
+
+if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
+    answer=$(osascript -e 'button returned of (display alert "Startup Company" message "Node.js is needed to run the game. Install it from nodejs.org, then open the game again." buttons {"Cancel", "Open nodejs.org"} default button "Open nodejs.org")' 2>/dev/null)
+    [ "$answer" = "Open nodejs.org" ] && open "https://nodejs.org"
+    exit 1
+fi
+
+if [ ! -f "$ELECTRON_BIN" ]; then
+    notify "First run: installing Electron. This takes a minute..."
+    if ! (cd "$APP_DIR" && npm install --force --ignore-scripts && node node_modules/electron/install.js) >"$LOG" 2>&1 \
+        || [ ! -f "$ELECTRON_BIN" ]; then
+        alert "Electron did not install. Check your internet connection and try again. Details: ~/Library/Logs/StartupCompanyLauncher.log"
+        exit 1
+    fi
+fi
+
+# Start the game as its own app via LaunchServices. A plain child process would be killed by
+# macOS as soon as this launcher app exits.
+open -n "$APP_DIR/node_modules/electron/dist/Electron.app" --args "$APP_DIR"
+exit 0

@@ -73,19 +73,21 @@ The game runs in real time with a day/night cycle. Each day your team works, ser
 
 Pick the launcher for your computer:
 
-| Computer       | Launcher            | How to start                          |
-| -------------- | ------------------- | ------------------------------------- |
-| 🍎 **macOS**   | `Start Mac.command` | Double-click it in Finder.            |
-| 🐧 **Linux**   | `start-linux.sh`    | Run `./start-linux.sh` in a terminal. |
-| 🪟 **Windows** | `Start Windows.bat` | Double-click it in File Explorer.     |
+| Computer       | Launcher              | How to start                                                                         |
+| -------------- | --------------------- | ------------------------------------------------------------------------------------ |
+| 🍎 **macOS**   | `Startup Company.app` | Double-click it in Finder.                                                           |
+| 🪟 **Windows** | `Startup Company.exe` | Double-click it in File Explorer.                                                    |
+| 🐧 **Linux**   | `start-linux.sh`      | Run `./start-linux.sh` once in a terminal. After that, start it from your apps menu. |
+
+The Mac and Windows launchers carry the game icon. On Linux, the first run adds **Startup Company** (with its icon) to your apps menu.
 
 Every launcher does the same three things:
 
-1. Checks for Node.js and npm (the Mac launcher installs Node via Homebrew if it is missing; the Linux launcher uses nvm).
-2. Installs Electron into `game/resources/app/node_modules` the first time.
+1. Checks for Node.js and npm (and tells you where to get Node.js if it is missing).
+2. Installs Electron into `game/resources/app/node_modules` the first time — this takes about a minute.
 3. Starts the game.
 
-> Tested on macOS. The Linux and Windows launchers are new — please open an issue if one does not work for you.
+> Tested on macOS. The Windows and Linux launchers are new — please open an issue if one does not work for you.
 
 <details>
 <summary><b>Run it without a launcher</b></summary>
@@ -162,9 +164,23 @@ That is a harmless Electron warning. It shows on every start, also when everythi
 </details>
 
 <details>
-<summary><b><code>permission denied</code> when starting the Mac or Linux launcher</b></summary>
+<summary><b>macOS says the app "cannot be opened" or is from an unidentified developer</b></summary>
 
-Run `chmod +x "Start Mac.command" start-linux.sh` once.
+The launcher app is not signed by Apple. Right-click **Startup Company.app** → **Open** → **Open**. You only need to do this once.
+
+</details>
+
+<details>
+<summary><b>Windows says "Windows protected your PC" or antivirus blocks the launcher</b></summary>
+
+The launcher is not signed. Click **More info** → **Run anyway**. If your antivirus still blocks it, use the backup launcher `game\launchers\windows\start-windows.bat`.
+
+</details>
+
+<details>
+<summary><b><code>permission denied</code> when starting the Linux launcher</b></summary>
+
+Run `chmod +x start-linux.sh` once.
 
 </details>
 
@@ -179,13 +195,14 @@ Some dependencies are Windows-only, so the launchers install with `--ignore-scri
 
 ```text
 .
-├── Start Mac.command               # macOS launcher (double-click)
-├── start-linux.sh                  # Linux launcher
-├── Start Windows.bat               # Windows launcher (double-click)
+├── Startup Company.app             # macOS launcher (double-click)
+├── Startup Company.exe             # Windows launcher (double-click)
+├── start-linux.sh                  # Linux launcher (adds an apps-menu entry)
 ├── README.md · LICENSE
 ├── docs/screenshots/               # Images used in this README
 └── game/                           # Everything the game needs
     ├── LICENSES.chromium.html · steam_appid.txt · version
+    ├── launchers/                  # Launcher sources, icons, backup .bat
     └── resources/app/
         ├── electron-start.js       # Electron entry point
         ├── package.json

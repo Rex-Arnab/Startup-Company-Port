@@ -1,9 +1,9 @@
 @echo off
-rem Startup Company launcher for Windows. Double-click this file.
+rem Backup Windows launcher (use it if antivirus blocks "Startup Company.exe"). Double-click it.
 setlocal
 title Startup Company launcher
 
-set "APP_DIR=%~dp0game\resources\app"
+set "APP_DIR=%~dp0..\..\resources\app"
 set "ELECTRON_EXE=%APP_DIR%\node_modules\electron\dist\electron.exe"
 
 echo.
@@ -36,7 +36,7 @@ if not exist "%ELECTRON_EXE%" (
     popd
 )
 if not exist "%ELECTRON_EXE%" (
-    echo [x] Electron did not install. Try: cd game\resources\app ^&^& npm install --force --ignore-scripts ^&^& node node_modules\electron\install.js
+    echo [x] Electron did not install. From the repo folder, try: cd game\resources\app ^&^& npm install --force --ignore-scripts ^&^& node node_modules\electron\install.js
     pause
     exit /b 1
 )

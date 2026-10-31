@@ -3,7 +3,8 @@
 set -e
 set -u
 
-APP_DIR="$(cd "$(dirname "$0")/game/resources/app" && pwd)"
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+APP_DIR="$ROOT/game/resources/app"
 
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -50,7 +51,30 @@ if [ ! -f "$ELECTRON_BIN" ]; then
 fi
 ok "Electron $("$ELECTRON_BIN" --version 2>/dev/null || echo "unknown")"
 
-# ── 4. Launch ─────────────────────────────────────────────────────────────────
+# ── 4. Apps menu entry (with the game icon) ───────────────────────────────────
+# Rewritten on every start so it keeps pointing at this folder if you move it.
+install_menu_entry() {
+    local dir="${XDG_DATA_HOME:-$HOME/.local/share}/applications"
+    mkdir -p "$dir"
+    cat > "$dir/startup-company.desktop" <<EOF
+[Desktop Entry]
+Type=Application
+Name=Startup Company
+Comment=Build a tech startup and retire rich
+Exec="$ROOT/start-linux.sh"
+Path=$ROOT
+Icon=$ROOT/game/launchers/linux/icon.png
+Terminal=false
+Categories=Game;Simulation;
+EOF
+    chmod +x "$dir/startup-company.desktop"
+}
+
+if [ "$(uname -s)" = "Linux" ]; then
+    install_menu_entry && ok "Startup Company is in your apps menu (with its icon)."
+fi
+
+# ── 5. Launch ─────────────────────────────────────────────────────────────────
 echo ""
 echo "  Launching Startup Company..."
 echo ""
